@@ -17,13 +17,11 @@ wn.title('Snake Game By Arik')
 wn.bgcolor('blue')
 wn.setup(width=600, height=600)
 # 600 pixels
-wn.tracer(0) # Turns off the screen Updates
-            # Helps the modules go fast as possible
+wn.tracer(0) 
 
 # Snake Head
 head = turtle.Turtle()
 head.speed(0)
-# Animation speed of turtle module, 0 means fastest animation speed
 head.shape('square')
 head.color('black')
 head.penup()
@@ -49,9 +47,6 @@ pen.goto(0,260)
 pen.write("Score: 0 High Score:0", align='center', font=('Courier', 24, "normal"))
 
 segments = []
-# When we start the game, there are no segments
-# We have to add a segment to the snake for touching the food
-
 
 # Function for changing direction of head
 def go_up():
@@ -80,25 +75,19 @@ def go_left():
 def move():
     if head.direction == 'up':
         y = head.ycor()
-        # Variable for y coordinate
         head.sety(y + 20)
 
     if head.direction == 'down':
         y = head.ycor()
-        # Variable for y coordinate
         head.sety(y - 20)
-        # changes y coordinate by 20 pixels
 
     if head.direction == 'left':
         x = head.xcor()
-        # Variable for y coordinate
         head.setx(x - 20)
 
     if head.direction == 'right':
         x = head.xcor()
-        # Variable for y coordinate
         head.setx(x + 20)
-
 
 # Keyboard Bindings
 wn.listen()
@@ -111,7 +100,6 @@ wn.onkeypress(go_left, "a")
 # Main game loop
 while True:
     wn.update()
-    # Every time of this loop, it updates the screen
 
     # Check for a collision with the border
     if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
@@ -120,18 +108,13 @@ while True:
         head.goto(0, 0)
         head.direction = 'stop'
 
-        # Hide the segment (NO WAY TO DELETE IN TURTLE)
         for segment in segments:
             segment.goto(1000, 1000)
 
-        # Clear the segments list (NOT WORKING COZ NEW SEGMENTS ARE JUMPING BACK!!)
         segments.clear()
 
         # Reset the delay
         delay = 0.1
-
-    # Reason you didn't see the turtle so far
-    # Built in function to calc distance between two turtles
 
         #Reset the score
         score = 0
@@ -152,10 +135,7 @@ while True:
         new_segment.penup()
         segments.append(new_segment)
         # Add it to the list
-    # Segments is a list, each segment is a turtle
-    # If i'm on segment 9, i want it to move on where segment is.
-    # index-1 =9-1=8
-
+   
         # Shorten the delay # as the snake gets longer, the turtle slows down
         delay -= 0.001
         # Increase the score
@@ -172,9 +152,6 @@ while True:
         y = segments[index-1].ycor()
         segments[index].goto(x,y)
 
-    # Move segment 0 to where the head is
-    # Check if there is a length 0
-    # first segment (0) is a special case!!!
     if len(segments) > 0:
         x = head.xcor()
         y = head.ycor()
@@ -205,5 +182,4 @@ while True:
 
 
 turtle.done()
-# Keeps our window open
 
